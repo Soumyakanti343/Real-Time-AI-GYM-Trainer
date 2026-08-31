@@ -1,17 +1,90 @@
 # Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
 
-# Virtual environment
+# Python cache / tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+
+# Virtual Environments
 venv/
-.env/
+.venv/
+env/
+ENV/
 
-# OS files
-.DS_Store
-Thumbs.db
+
+# Environment Variables / Secrets
+.env
+.env.*
+!.env.example
+
+# API keys / credentials
+*.pem
+*.key
+secrets.toml
+
+
+# Streamlit
+.streamlit/secrets.toml
+
 
 # Database
+data.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Keep database out of the repository
 Main App/data.db
+
 
 # Logs
 *.log
+logs/
+
+
+# OS Files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+
+# Temporary Files
+*.tmp
+*.temp
+*.bak
+
+
+# Python Build Files
+build/
+dist/
+*.egg-info/
+
+
+# Jupyter
+.ipynb_checkpoints/
+
+
+# Model / Large Generated Files
+# Uncomment if you generate large local model files
+# *.pt
+# *.pth
+# *.onnx
+# *.task
+
+
+
+
+
