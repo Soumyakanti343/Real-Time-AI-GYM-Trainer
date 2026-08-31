@@ -42,16 +42,21 @@ class PushUpDetector(BaseExercise) :
             hip_idx = self.RIGHT_HIP
             ankle_idx = self.RIGHT_ANKLE
 
-        elbow_angle = self.calculate_angle(self.get_point(landmarks, shoulder_idx), self.get_point(landmarks, elbow_idx), self.get_point(landmarks, wrist_idx),)
-        body_angle = self.calculate_angle( self.get_point(landmarks, shoulder_idx), self.get_point(landmarks, hip_idx), self.get_point(landmarks, ankle_idx),)
-
+        elbow_angle = self.calculate_angle(
+            self.get_point(landmarks, shoulder_idx),
+            self.get_point(landmarks, elbow_idx),
+            self.get_point(landmarks, wrist_idx),
+        )
+        body_angle = self.calculate_angle(
+            self.get_point(landmarks, shoulder_idx),
+            self.get_point(landmarks, hip_idx),
+            self.get_point(landmarks, ankle_idx),
+        )
         shoulder_y = landmarks[shoulder_idx].y
         ankle_y = landmarks[ankle_idx].y
         hip_y = landmarks[hip_idx].y
-
         expected_hip_y = (shoulder_y + ankle_y) / 2
         hip_deviation = hip_y - expected_hip_y
-
         key_landmarks_visible = landmarks[shoulder_idx].visibility > self.MIN_VISIBILITY and landmarks[elbow_idx].visibility > self.MIN_VISIBILITY and landmarks[wrist_idx].visibility > self.MIN_VISIBILITY and landmarks[hip_idx].visibility > self.MIN_VISIBILITY
         
         if key_landmarks_visible :
@@ -66,7 +71,7 @@ class PushUpDetector(BaseExercise) :
             body_alignment = "Straight"
         elif (body_angle > 140) :
             body_alignment = "Slight Bend"
-        else:
+        else :
             body_alignment = "Poor Form"
 
         if (abs(hip_deviation) <= self.HIP_SAG_TOLERANCE) :
@@ -85,4 +90,7 @@ class PushUpDetector(BaseExercise) :
 
 
 
+
+
+    
     
