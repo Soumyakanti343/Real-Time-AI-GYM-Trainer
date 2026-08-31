@@ -9,7 +9,7 @@ class VoicePipeline :
         self.last_spoken_at = 0
 
     def _find_form_issue(self, exercise, metrics) :
-        if "issue" in metrics:
+        if "issue" in metrics :
             return metrics["issue"]
 
         if (exercise == "Squats") :
@@ -88,8 +88,6 @@ def autoplay_audio(audio_bytes) :
     
     st.markdown("<style>[data-testid='stAudio'] {display: none;}</style>", unsafe_allow_html = True)
     st.audio(audio_bytes, format = "audio/mp3", autoplay = True)
-
-
 
 
 
