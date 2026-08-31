@@ -24,8 +24,16 @@ class LungesDetector(BaseExercise) :
         self.stage = None
 
     def process(self, landmarks) -> dict :
-        left_knee_angle = self.calculate_angle(self.get_point(landmarks, self.LEFT_HIP), self.get_point(landmarks, self.LEFT_KNEE), self.get_point(landmarks, self.LEFT_ANKLE),)
-        right_knee_angle = self.calculate_angle(self.get_point(landmarks, self.RIGHT_HIP), self.get_point(landmarks, self.RIGHT_KNEE), self.get_point(landmarks, self.RIGHT_ANKLE),)
+        left_knee_angle = self.calculate_angle(
+            self.get_point(landmarks, self.LEFT_HIP),
+            self.get_point(landmarks, self.LEFT_KNEE),
+            self.get_point(landmarks, self.LEFT_ANKLE),
+        )
+        right_knee_angle = self.calculate_angle(
+            self.get_point(landmarks, self.RIGHT_HIP),
+            self.get_point(landmarks, self.RIGHT_KNEE),
+            self.get_point(landmarks, self.RIGHT_ANKLE),
+        )
 
         if (left_knee_angle <= right_knee_angle) :
             front_knee_angle = left_knee_angle
@@ -50,7 +58,11 @@ class LungesDetector(BaseExercise) :
                 self.stage = "up"
                 self.reps += 1
 
-        torso_angle = self.calculate_angle(self.get_point(landmarks, shoulder_idx_for_torso), self.get_point(landmarks, front_hip_idx), self.get_point(landmarks, front_knee_idx),)
+        torso_angle = self.calculate_angle(
+            self.get_point(landmarks, shoulder_idx_for_torso),
+            self.get_point(landmarks, front_hip_idx),
+            self.get_point(landmarks, front_knee_idx),
+        )
 
         shoulder_mid_x = (landmarks[self.LEFT_SHOULDER].x + landmarks[self.RIGHT_SHOULDER].x) / 2
         hip_mid_x = (landmarks[self.LEFT_HIP].x + landmarks[self.RIGHT_HIP].x) / 2
@@ -70,4 +82,6 @@ class LungesDetector(BaseExercise) :
 
 
 
+
+    
     
