@@ -41,11 +41,14 @@ class ShoulderPressDetector(BaseExercise) :
             hip_idx = self.RIGHT_HIP
             knee_idx = self.RIGHT_KNEE
 
-        elbow_angle = self.calculate_angle(self.get_point(landmarks, shoulder_idx), self.get_point(landmarks, elbow_idx), self.get_point(landmarks, wrist_idx),)
-
+        elbow_angle = self.calculate_angle(
+            self.get_point(landmarks, shoulder_idx),
+            self.get_point(landmarks, elbow_idx),
+            self.get_point(landmarks, wrist_idx),
+        )
         key_landmarks_visible = landmarks[shoulder_idx].visibility > self.MIN_VISIBILITY and landmarks[elbow_idx].visibility > self.MIN_VISIBILITY and landmarks[wrist_idx].visibility > self.MIN_VISIBILITY
 
-        if key_landmarks_visible : 
+        if key_landmarks_visible :
             if (elbow_angle > self.UP_THRESHOLD) :
                 self.stage = "up"
 
@@ -62,7 +65,11 @@ class ShoulderPressDetector(BaseExercise) :
         else :
             extension_status = "START POSITION"
 
-        back_angle = self.calculate_angle(self.get_point(landmarks, shoulder_idx), self.get_point(landmarks, hip_idx), self.get_point(landmarks, knee_idx),)
+        back_angle = self.calculate_angle(
+            self.get_point(landmarks, shoulder_idx),
+            self.get_point(landmarks, hip_idx),
+            self.get_point(landmarks, knee_idx),
+        )
 
         if (back_angle >= 160) :
             back_arch_status = "Neutral"
@@ -80,4 +87,9 @@ class ShoulderPressDetector(BaseExercise) :
 
 
 
+
+
+
+
+    
     
