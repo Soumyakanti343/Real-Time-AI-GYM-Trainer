@@ -17,7 +17,7 @@ from services.coaching.tts import TextToSpeech
 from services.coaching.voice_pipeline import VoicePipeline, autoplay_audio
 
   
-def main() :
+def main():
     st.set_page_config(
         page_icon = "🏋️‍♀️",
         page_title = "AI Real-time GYM Coach",
@@ -65,9 +65,7 @@ def main() :
             plan_exercise = st.selectbox("Exercise", options = EXERCISE_OPTIONS, key = "plan_exercise")
             plan_sets = st.number_input("Sets", min_value = 0, max_value = 50, key = "plan_sets", step = 1)
             plan_reps = st.number_input("Reps per Set", min_value = 0, max_value = 50, key = "plan_reps", step = 1)
-
             st.markdown("")
-
             start_session_button = st.button("Start Workout", width = "stretch", key = "start_session_button")
 
             if start_session_button :
@@ -79,7 +77,7 @@ def main() :
                 st.session_state.set_cycle_started_at = time.time()
                 st.session_state.last_saved_sets_completed = 0
 
-                if st.session_state.voice_pipeline :
+                if st.session_state.voice_pipeline:
                     result = st.session_state.voice_pipeline.process_event(
                         event = "workout_started",
                         exercise = plan_exercise,
@@ -96,15 +94,13 @@ def main() :
             exercise = st.session_state.get("exercise_type")
             sets = st.session_state.get("target_sets")
             reps = st.session_state.get("reps_per_set")
-
             st.info(f"**{exercise}** -- {sets} Sets / {reps} Reps")
-
-            end_session_button = st.button("End Workout", key = "end_session_button", width = "stretch")
+            end_session_button = st.button("End Workout", key="end_session_button", width="stretch")
 
             if end_session_button :
                 st.session_state.workout_started = False
                 
-                if st.session_state.voice_pipeline :
+                if st.session_state.voice_pipeline:
                     result = st.session_state.voice_pipeline.process_event(
                         event = "workout_completed",
                         exercise = exercise,
@@ -115,7 +111,7 @@ def main() :
 
                 st.rerun()
 
-        if  workout_started:
+        if workout_started :
             st.divider()
 
             exercise = st.session_state.get("exercise_type")
@@ -124,9 +120,7 @@ def main() :
             reps_per_set = st.session_state.get("reps_per_set")
             sets_completed = st.session_state.get("sets_completed")
             target_sets = st.session_state.get("target_sets")
-
             st.subheader("Progress")
-
             st.metric("Total Reps", f"{total_reps}")
             st.metric("Current Set Reps", f"{current_set_reps} / {reps_per_set}")
             st.metric("Sets Completed", f"{sets_completed} / {target_sets}")
@@ -192,7 +186,7 @@ def main() :
                 </p>
             </div>
             """,
-            unsafe_allow_html = True,
+            unsafe_allow_html=True,
         )
     else :
         context = webrtc_streamer(
@@ -216,13 +210,12 @@ def main() :
         inject_webrtc_styles()
 
     st.divider()
-
     st.markdown("#### Workout History")
-
     user_id = st.session_state.get("user_id", 0)
 
     if isinstance(user_id, int) :
         history_rows = get_users_exercises(user_id)
+
         arr = [
             {
                 "Exercise" : row['exercise_name'],
@@ -239,20 +232,18 @@ def main() :
         if not df.empty :
             df["Date"] = pd.to_datetime(df["Date"]).dt.date
             agg_df = df.groupby(["Exercise", "Date"]).agg({
-                "Reps": 'sum',
-                "Sets": "sum",
-                "Time (sec)": "sum"
+                "Reps" : 'sum',
+                "Sets" : "sum",
+                "Time (sec)" : "sum"
             }).reset_index()
             agg_df.index += 1
             st.table(agg_df, border = "horizontal")
-        else :
+        else:
             st.info("No workout history found.")
-
 
 
 if __name__ == "__main__" :
     main()
-
 
 
 
