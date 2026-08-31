@@ -1,6 +1,7 @@
 import math 
 from abc import ABC, abstractmethod
 
+
 class BaseExercise(ABC) :
     def __init__(self) :
         self.reps = 0
@@ -13,7 +14,7 @@ class BaseExercise(ABC) :
         mag_a = math.sqrt(ax ** 2 + ay ** 2)
         mag_c = math.sqrt(cx ** 2 + cy ** 2)
 
-        if (mag_a * mag_c) == 0 : 
+        if (mag_a * mag_c == 0) :
             return 0.0
 
         cos_angle = max(-1.0, min(1.0, dot / (mag_a * mag_c)))
@@ -21,18 +22,18 @@ class BaseExercise(ABC) :
 
     def get_point(self, landmarks, idx) :
         p = landmarks[idx]
-
         return (p.x, p.y)
 
     @abstractmethod
     def process(self, landmarks) :
         pass
 
-    @abstractmethod 
+    @abstractmethod
     def reset(self) :
-        pass 
+        pass
 
 
 
 
 
+    
