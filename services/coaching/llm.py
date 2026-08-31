@@ -19,7 +19,7 @@ class LLMCoach :
             {"role" : "user", "content" : prompt}
         ]
         response = self.client.chat.completions.create(
-            model = "llama-3.3-70b-versatile", #"qwen/qwen3.6-27b", #"llama-3.3-70b-versatile",
+            model = "qwen/qwen3.6-27b", # "llama-3.3-70b-versatile",
             messages = messages,
             temperature = 0.4,
         )
