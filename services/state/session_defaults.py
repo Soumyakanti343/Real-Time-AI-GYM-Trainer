@@ -39,9 +39,9 @@ def initial_session_defaults() :
         "balance_status": "N/A",
     }
 
-
     for key, value in defaults.items() :
         if key not in st.session_state :
             st.session_state[key] = value
+
 
 
