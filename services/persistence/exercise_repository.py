@@ -51,7 +51,7 @@ def get_user(username: str) -> sqlite3.Row :
 def create_user(username: str) -> sqlite3.Row :
     conn = _get_connection()
     
-    with conn :
+    with conn:
         conn.execute(
             "INSERT INTO users (username) VALUES (?)", (username,)
         )
